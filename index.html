@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Bake Factory | Café in Gachibowli, Hyderabad</title>
+<meta name="description" content="The Bake Factory — freshly baked goodness, breakfast, pizzas, burgers, sandwiches, coffee and desserts in Gachibowli, Hyderabad.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700;800&family=Dancing+Script:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+<style>
+:root{
+    --coffee:#24130d;
+    --coffee-2:#351c13;
+    --gold:#d4a373;
+    --gold-light:#f0dcc8;
+    --cream:#fbf6f0;
+    --cream-2:#f2e7dc;
+    --white:#fff;
+    --text:#2b211c;
+    --muted:#75665b;
+    --border:#e7d8c9;
+    --shadow:0 18px 50px rgba(45,25,15,.10);
+    --radius:20px;
+    --ease:.3s cubic-bezier(.2,.7,.2,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"DM Sans",sans-serif;background:var(--cream);color:var(--text);line-height:1.6;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%}
+button,input{font:inherit}
+.container{width:min(1240px,92%);margin:auto}
+.section{padding:96px 0}
+.section-head{text-align:center;max-width:720px;margin:0 auto 42px}
+.eyebrow{font-family:"Dancing Script",cursive;color:#b87955;font-size:1.35rem}
+.section-head h2{font-family:"Playfair Display",serif;font-size:clamp(2.2rem,4vw,3.5rem);line-height:1.1;margin:6px 0 14px}
+.section-head h2 span{color:#b96f4c}
+.section-head p{color:var(--muted)}
+
+.btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:9px;
+    border:0;border-radius:999px;padding:13px 22px;font-weight:700;cursor:pointer;
+    transition:var(--ease)
+}
+.btn-gold{background:var(--gold);color:var(--coffee)}
+.btn-gold:hover{transform:translateY(-2px);background:var(--gold-light)}
+.btn-dark{background:var(--coffee);color:#fff}
+.btn-dark:hover{transform:translateY(-2px);background:var(--coffee-2)}
+.btn-outline{background:transparent;color:var(--coffee);border:1px solid var(--coffee)}
+.btn-outline:hover{background:var(--coffee);color:#fff}
+
+/* Header */
+.header{
+    position:fixed;inset:0 0 auto;z-index:1000;
+    background:rgba(22,10,6,.88);backdrop-filter:blur(16px);
+    border-bottom:1px solid rgba(212,163,115,.22);
+    transition:var(--ease)
+}
+.header.scrolled{background:rgba(15,7,4,.97);box-shadow:0 8px 30px rgba(0,0,0,.28)}
+.navbar{height:82px;display:flex;align-items:center;justify-content:space-between;gap:25px}
+.logo{color:#fff;display:flex;flex-direction:column}
+.logo strong{font-family:"Playfair Display",serif;font-size:1.4rem;letter-spacing:1px}
+.logo small{color:var(--gold);font-size:.62rem;letter-spacing:3px}
+.nav{display:flex;align-items:center;gap:26px}
+.nav a{color:rgba(255,255,255,.82);font-size:.78rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;position:relative}
+.nav a:hover,.nav a.active{color:var(--gold)}
+.nav a.active:after{content:"";position:absolute;left:0;right:0;bottom:-8px;height:2px;background:var(--gold)}
+.header-actions{display:flex;align-items:center;gap:10px}
+.social{width:34px;height:34px;border:1px solid rgba(212,163,115,.3);border-radius:50%;display:grid;place-items:center;color:#fff;font-size:.82rem;transition:var(--ease)}
+.social:hover{background:var(--gold);color:var(--coffee)}
+.mobile-toggle{display:none;background:transparent;border:0;color:#fff;font-size:1.35rem;cursor:pointer}
+
+/* Hero */
+.hero{min-height:100vh;display:grid;place-items:center;position:relative;overflow:hidden;background:#130906}
+.hero:before{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(90deg,rgba(10,5,3,.88),rgba(10,5,3,.52),rgba(10,5,3,.66)),
+    url("assets/storefront.jpg") center/cover no-repeat;
+}
+.hero-content{position:relative;z-index:2;color:#fff;width:min(1240px,92%);padding:145px 0 110px}
+.hero-script{font-family:"Dancing Script",cursive;color:var(--gold-light);font-size:2rem}
+.hero h1{font-family:"Playfair Display",serif;font-size:clamp(3.3rem,7vw,6.8rem);line-height:.95;max-width:800px;margin:10px 0 22px}
+.hero h1 span{color:var(--gold)}
+.hero p{max-width:610px;color:rgba(255,255,255,.78);font-size:1.08rem;margin-bottom:28px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+.hero-bar{
+    position:absolute;z-index:3;bottom:28px;left:50%;transform:translateX(-50%);
+    width:min(1100px,90%);background:rgba(24,11,7,.88);border:1px solid rgba(212,163,115,.3);
+    border-radius:22px;backdrop-filter:blur(16px);padding:18px 22px;
+    display:grid;grid-template-columns:repeat(4,1fr);gap:20px
+}
+.hero-feature{display:flex;gap:12px;align-items:center;color:#fff}
+.hero-feature i{color:var(--gold);font-size:1.3rem}
+.hero-feature strong{display:block;font-size:.76rem;letter-spacing:.7px}
+.hero-feature small{color:rgba(255,255,255,.55)}
+
+/* Highlights */
+.highlights{background:#fff;border-bottom:1px solid var(--border)}
+.highlight-grid{display:grid;grid-template-columns:repeat(4,1fr)}
+.highlight{text-align:center;padding:30px 15px;border-right:1px solid var(--border)}
+.highlight:last-child{border:0}
+.highlight i{color:#b87955;font-size:1.8rem;margin-bottom:8px}
+.highlight h3{font-family:"Playfair Display",serif;font-size:1.1rem}
+.highlight p{font-size:.82rem;color:var(--muted)}
+
+/* Story */
+.story{background:var(--cream-2)}
+.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:65px;align-items:center}
+.story-photo{height:500px;border-radius:var(--radius);overflow:hidden;position:relative;box-shadow:var(--shadow)}
+.story-photo img{width:100%;height:100%;object-fit:cover}
+.story-badge{position:absolute;top:20px;left:20px;background:var(--coffee);color:var(--gold);padding:8px 16px;border-radius:999px;font-family:"Dancing Script";font-size:1.1rem}
+.story-copy h2{font-family:"Playfair Display",serif;font-size:clamp(2.2rem,4vw,3.3rem);line-height:1.1;margin:8px 0 20px}
+.story-copy h2 span{color:#b96f4c}
+.story-copy p{color:var(--muted);margin-bottom:17px}
+
+/* Signature */
+.signature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.food-feature{background:#fff;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:0 8px 25px rgba(45,25,15,.05);transition:var(--ease)}
+.food-feature:hover{transform:translateY(-7px);box-shadow:var(--shadow)}
+.food-feature img{width:100%;height:240px;object-fit:cover}
+.food-feature-body{padding:22px}
+.food-feature h3{font-family:"Playfair Display",serif;font-size:1.3rem;margin-bottom:7px}
+.food-feature p{font-size:.88rem;color:var(--muted);margin-bottom:15px}
+.link{color:#b96f4c;font-weight:700;font-size:.86rem}
+
+/* MENU */
+.menu-section{background:#f4eadf}
+.menu-toolbar{
+    display:flex;align-items:center;justify-content:space-between;gap:18px;
+    margin-bottom:24px;flex-wrap:wrap
+}
+.search{
+    flex:1;min-width:240px;position:relative
+}
+.search i{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:#9b8b7e}
+.search input{
+    width:100%;padding:13px 18px 13px 44px;border:1px solid var(--border);
+    border-radius:999px;background:#fff;outline:0;color:var(--text)
+}
+.search input:focus{border-color:var(--gold);box-shadow:0 0 0 4px rgba(212,163,115,.12)}
+.cart-pill{
+    border:1px solid var(--coffee);background:var(--coffee);color:#fff;
+    border-radius:999px;padding:11px 17px;font-weight:700;white-space:nowrap
+}
+.tabs-wrap{position:relative;margin-bottom:28px}
+.menu-tabs{
+    display:flex;gap:9px;overflow-x:auto;padding:4px 2px 12px;
+    scrollbar-width:thin
+}
+.menu-tab{
+    flex:0 0 auto;border:1px solid var(--border);background:#fff;color:var(--muted);
+    border-radius:999px;padding:10px 17px;font-size:.82rem;font-weight:700;cursor:pointer;transition:var(--ease)
+}
+.menu-tab:hover{border-color:var(--gold);color:var(--coffee)}
+.menu-tab.active{background:var(--coffee);border-color:var(--coffee);color:#fff}
+.menu-count{font-size:.84rem;color:var(--muted);margin-bottom:16px}
+.menu-grid{
+    display:grid;grid-template-columns:repeat(2,1fr);gap:18px
+}
+.menu-card{
+    background:#fff;border:1px solid var(--border);border-radius:18px;overflow:hidden;
+    display:grid;grid-template-columns:145px 1fr;min-height:175px;transition:var(--ease)
+}
+.menu-card:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:rgba(212,163,115,.75)}
+.menu-card-image{height:100%;min-height:175px;background:#eadbcf;overflow:hidden}
+.menu-card-image img{width:100%;height:100%;object-fit:cover;transition:var(--ease)}
+.menu-card:hover img{transform:scale(1.05)}
+.menu-card-body{padding:18px;display:flex;flex-direction:column}
+.menu-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.menu-top h3{font-family:"Playfair Display",serif;font-size:1.14rem;line-height:1.2}
+.menu-number{font-size:.68rem;color:#a28f80;letter-spacing:1px}
+.menu-desc{font-size:.82rem;color:var(--muted);margin:8px 0 13px}
+.tags{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:auto}
+.tag{font-size:.63rem;font-weight:700;border-radius:999px;padding:4px 8px}
+.tag-veg{background:#e6f3e6;color:#327333}
+.tag-nonveg{background:#fae7e2;color:#a64b3a}
+.tag-popular{background:#f8eddc;color:#9b6c36}
+.tag-spicy{background:#fde9e1;color:#b24d2e}
+.menu-bottom{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:14px}
+.menu-price{font-weight:800;color:#b96f4c;font-size:.92rem}
+.add-btn{border:1px solid var(--coffee);background:transparent;color:var(--coffee);border-radius:999px;padding:7px 12px;font-weight:800;font-size:.75rem;cursor:pointer;transition:var(--ease)}
+.add-btn:hover{background:var(--coffee);color:#fff}
+.no-results{grid-column:1/-1;text-align:center;padding:55px 20px;color:var(--muted);background:#fff;border:1px solid var(--border);border-radius:18px}
+
+/* Breakfast */
+.breakfast{background:#fff}
+.breakfast-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.breakfast-photo{height:430px;border-radius:var(--radius);overflow:hidden}
+.breakfast-photo img{width:100%;height:100%;object-fit:cover}
+.breakfast-copy h2,.coffee-copy h2{font-family:"Playfair Display",serif;font-size:clamp(2.2rem,4vw,3.2rem);line-height:1.1;margin:7px 0 18px}
+.breakfast-copy h2 span,.coffee-copy h2 span{color:var(--gold)}
+.breakfast-copy p,.coffee-copy p{color:var(--muted);margin-bottom:20px}
+.list{display:grid;grid-template-columns:1fr 1fr;gap:8px 18px;margin-bottom:22px}
+.list li{list-style:none;padding:9px 0;border-bottom:1px solid var(--border);font-size:.9rem}
+.list li:before{content:"✦";color:#b96f4c;margin-right:8px}
+
+/* Coffee */
+.coffee{background:var(--coffee);color:#fff}
+.coffee-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.coffee-photo{height:430px;border-radius:var(--radius);overflow:hidden;border:1px solid rgba(212,163,115,.3)}
+.coffee-photo img{width:100%;height:100%;object-fit:cover}
+.coffee-copy p{color:rgba(255,255,255,.62)}
+.coffee-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.coffee-tags span{padding:7px 12px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);font-size:.78rem;color:rgba(255,255,255,.75)}
+
+/* Gallery */
+.gallery{background:#fff}
+.gallery-grid{display:grid;grid-template-columns:2fr 1fr 1fr;grid-auto-rows:220px;gap:12px}
+.gallery-item{border-radius:15px;overflow:hidden}
+.gallery-item img{width:100%;height:100%;object-fit:cover;transition:var(--ease)}
+.gallery-item:hover img{transform:scale(1.05)}
+.gallery-wide{grid-row:span 2}
+.gallery-tall{grid-row:span 2}
+
+/* Reviews */
+.reviews{background:var(--cream-2)}
+.rating{text-align:center;margin-bottom:35px}
+.rating strong{font-family:"Playfair Display",serif;font-size:3.3rem}
+.rating span{color:#c89655}
+.rating p{color:var(--muted)}
+.review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.review{background:#fff;border:1px solid var(--border);border-radius:18px;padding:24px}
+.stars{color:#d2a05f;margin-bottom:10px}
+.review p{font-size:.9rem;font-style:italic;color:#4d4038;margin-bottom:15px}
+.review small{color:var(--muted);font-weight:700}
+
+/* Visit */
+.visit{background:#fff}
+.visit-grid{display:grid;grid-template-columns:1fr 1fr;gap:45px;align-items:stretch}
+.visit-copy h2{font-family:"Playfair Display",serif;font-size:3rem;line-height:1.1;margin:8px 0 18px}
+.contact-line{display:flex;gap:12px;align-items:flex-start;margin:15px 0;color:var(--muted)}
+.contact-line i{color:#b96f4c;width:20px;text-align:center;margin-top:4px}
+.hours{background:var(--cream);border:1px solid var(--border);border-radius:15px;padding:15px 18px;margin:20px 0}
+.hours-row{display:flex;justify-content:space-between;font-size:.88rem}
+.map-card{
+    min-height:390px;border-radius:var(--radius);border:1px solid var(--border);
+    background:linear-gradient(135deg,#eee0d3,#e3d2c2);
+    display:grid;place-items:center;text-align:center;padding:30px
+}
+.map-card i{font-size:3.5rem;color:#b96f4c;margin-bottom:10px}
+
+/* Reservation */
+.reservation{background:var(--coffee);color:#fff;text-align:center}
+.reservation h2{font-family:"Playfair Display",serif;font-size:clamp(2.3rem,4vw,3.6rem);line-height:1.1}
+.reservation p{max-width:600px;margin:15px auto 24px;color:rgba(255,255,255,.62)}
+
+/* Footer */
+.footer{background:#120906;color:rgba(255,255,255,.68);padding:55px 0 20px;border-top:1px solid rgba(212,163,115,.2)}
+.footer-cta{
+    border:1px solid rgba(212,163,115,.3);border-radius:22px;padding:24px;
+    display:flex;align-items:center;justify-content:space-between;gap:25px;
+    background:linear-gradient(135deg,#21100a,#32190f);margin-bottom:50px
+}
+.footer-cta h3{font-family:"Playfair Display",serif;color:#fff;font-size:1.55rem}
+.footer-cta p{font-size:.85rem;margin-top:4px}
+.footer-grid{display:grid;grid-template-columns:1.7fr 1fr 1.3fr 1fr;gap:40px}
+.footer h4{color:var(--gold);font-size:.8rem;letter-spacing:1.5px;margin-bottom:16px}
+.footer-brand strong{display:block;font-family:"Playfair Display",serif;color:#fff;font-size:1.5rem}
+.footer-brand small{color:var(--gold);letter-spacing:2px}
+.footer-brand p{max-width:260px;margin-top:12px;font-size:.85rem}
+.footer-links{list-style:none}
+.footer-links li{margin:8px 0}
+.footer-links a:hover{color:var(--gold)}
+.social-row{display:flex;gap:8px;margin-bottom:18px}
+.footer .social{background:rgba(255,255,255,.06)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.07);margin-top:35px;padding-top:18px;display:flex;justify-content:space-between;gap:15px;font-size:.76rem}
+.whatsapp{
+    position:fixed;right:22px;bottom:22px;width:56px;height:56px;border-radius:50%;
+    display:grid;place-items:center;background:#25d366;color:#fff;font-size:1.7rem;
+    z-index:9999;box-shadow:0 10px 25px rgba(37,211,102,.3)
+}
+
+/* Modal */
+.modal{position:fixed;inset:0;background:rgba(10,5,3,.7);backdrop-filter:blur(7px);display:none;place-items:center;z-index:3000;padding:20px}
+.modal.open{display:grid}
+.modal-box{width:min(520px,100%);background:#fff;border-radius:22px;padding:28px;position:relative;box-shadow:0 30px 80px rgba(0,0,0,.3)}
+.modal-close{position:absolute;right:16px;top:14px;border:0;background:var(--cream-2);width:36px;height:36px;border-radius:50%;cursor:pointer}
+.modal-box h3{font-family:"Playfair Display",serif;font-size:1.8rem;margin-right:45px}
+.modal-box p{color:var(--muted);margin:10px 0 18px}
+.modal-actions{display:flex;gap:10px;flex-wrap:wrap}
+
+/* Responsive */
+@media(max-width:1050px){
+    .nav{gap:15px}
+    .header-actions .social{display:none}
+    .menu-grid{grid-template-columns:1fr}
+    .footer-grid{grid-template-columns:1.5fr 1fr 1fr}
+}
+@media(max-width:820px){
+    .section{padding:72px 0}
+    .mobile-toggle{display:block}
+    .nav{
+        display:none;position:absolute;left:0;right:0;top:82px;
+        background:#180b07;flex-direction:column;align-items:flex-start;
+        padding:20px 4%;gap:17px;border-top:1px solid rgba(212,163,115,.2)
+    }
+    .nav.open{display:flex}
+    .nav a.active:after{display:none}
+    .header-actions .btn{display:none}
+    .hero-bar{grid-template-columns:repeat(2,1fr)}
+    .highlight-grid{grid-template-columns:repeat(2,1fr)}
+    .highlight:nth-child(2){border-right:0}
+    .highlight:nth-child(-n+2){border-bottom:1px solid var(--border)}
+    .story-grid,.breakfast-grid,.coffee-grid,.visit-grid{grid-template-columns:1fr;gap:30px}
+    .story-photo,.breakfast-photo,.coffee-photo{height:360px}
+    .signature-grid{grid-template-columns:1fr 1fr}
+    .review-grid{grid-template-columns:1fr 1fr}
+    .footer-grid{grid-template-columns:1fr 1fr}
+    .footer-cta{flex-direction:column;align-items:flex-start}
+}
+@media(max-width:560px){
+    .navbar{height:74px}
+    .nav{top:74px}
+    .hero-content{padding:130px 0 160px}
+    .hero h1{font-size:3.2rem}
+    .hero-bar{bottom:15px;grid-template-columns:1fr 1fr;padding:14px}
+    .hero-feature strong{font-size:.66rem}
+    .hero-feature small{font-size:.65rem}
+    .highlight-grid{grid-template-columns:1fr 1fr}
+    .signature-grid,.review-grid,.footer-grid{grid-template-columns:1fr}
+    .menu-card{grid-template-columns:105px 1fr;min-height:150px}
+    .menu-card-image{min-height:150px}
+    .menu-card-body{padding:14px}
+    .menu-top h3{font-size:1rem}
+    .menu-desc{font-size:.76rem}
+    .gallery-grid{grid-template-columns:1fr 1fr;grid-auto-rows:160px}
+    .gallery-wide{grid-column:span 2;grid-row:span 1}
+    .gallery-tall{grid-row:span 2}
+    .list{grid-template-columns:1fr}
+    .footer-bottom{flex-direction:column}
+    .whatsapp{right:16px;bottom:75px}
+}
+
+/* ===== PREMIUM 3D / CLIENT DEMO ENHANCEMENTS ===== */
+body{perspective:1200px}
+.hero{isolation:isolate}
+.hero:after{content:"";position:absolute;inset:auto 0 0;height:35%;background:linear-gradient(to top,rgba(12,5,2,.7),transparent);z-index:1;pointer-events:none}
+.hero-content{animation:heroIn .9s cubic-bezier(.2,.8,.2,1) both}
+@keyframes heroIn{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+.hero-script{display:inline-block;text-shadow:0 4px 25px rgba(0,0,0,.45)}
+.hero h1{text-shadow:0 8px 35px rgba(0,0,0,.5);letter-spacing:-2px}
+.hero-actions .btn{box-shadow:0 10px 28px rgba(0,0,0,.18)}
+.hero-bar{transform:translateX(-50%) translateZ(20px);box-shadow:0 18px 50px rgba(0,0,0,.3)}
+.hero-feature{transition:transform .35s ease}
+.hero-feature:hover{transform:translateY(-3px)}
+.highlights{position:relative;z-index:4}
+.highlight{transition:transform .35s ease,background .35s ease}
+.highlight:hover{transform:translateY(-5px);background:#fffaf6}
+.food-feature,.menu-card,.review,.story-photo,.breakfast-photo,.coffee-photo,.map-card{transform-style:preserve-3d;will-change:transform}
+.food-feature{transition:transform .18s ease,box-shadow .35s ease,border-color .35s ease}
+.food-feature:hover{box-shadow:0 25px 60px rgba(45,25,15,.16)}
+.food-feature img{filter:saturate(.96);transition:transform .5s ease,filter .5s ease}
+.food-feature:hover img{filter:saturate(1.08)}
+.menu-card{transition:transform .18s ease,box-shadow .35s ease,border-color .35s ease}
+.menu-card:after{content:"";position:absolute;inset:0;border-radius:18px;pointer-events:none;background:linear-gradient(120deg,rgba(255,255,255,.18),transparent 35%);opacity:0;transition:.3s}
+.menu-card:hover:after{opacity:1}
+.menu-card{position:relative}
+.menu-card-body{position:relative;z-index:1}
+.tag{transition:transform .25s ease}
+.tag:hover{transform:translateY(-2px)}
+.section-head{position:relative}
+.section-head:after{content:"";display:block;width:48px;height:2px;background:var(--gold);margin:20px auto 0;opacity:.7}
+.eyebrow{letter-spacing:.2px}
+.story-photo:before,.breakfast-photo:before,.coffee-photo:before{content:"";position:absolute;inset:14px;border:1px solid rgba(255,255,255,.25);border-radius:15px;z-index:2;pointer-events:none}
+.story-photo,.breakfast-photo,.coffee-photo{box-shadow:0 22px 60px rgba(45,25,15,.18)}
+.review{transition:transform .35s ease,box-shadow .35s ease}
+.review:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+.rating strong{display:inline-block;animation:pulseRating 2.5s ease-in-out infinite}
+@keyframes pulseRating{50%{transform:scale(1.03)}}
+.whatsapp{animation:waPulse 2.4s ease-in-out infinite}
+@keyframes waPulse{0%,100%{box-shadow:0 10px 25px rgba(37,211,102,.3)}50%{box-shadow:0 10px 35px rgba(37,211,102,.55),0 0 0 8px rgba(37,211,102,.08)}}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:none}
+@media(max-width:820px){.hero-bar{transform:translateX(-50%)}.hero h1{letter-spacing:-1px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}}
+
+</style>
+</head>
+
+<body>
+
+<header class="header" id="header">
+    <div class="container navbar">
+        <a href="#home" class="logo">
+            <strong>THE BAKE FACTORY</strong>
+            <small>EST. 2015</small>
+        </a>
+
+        <nav class="nav" id="nav">
+            <a href="#home" class="active">Home</a>
+            <a href="#menu">Menu</a>
+            <a href="#story">Our Story</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#reviews">Reviews</a>
+            <a href="#visit">Contact</a>
+        </nav>
+
+        <div class="header-actions">
+            <a class="social" href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a class="social" href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a class="btn btn-gold" href="#menu">Order Now</a>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Open menu"><i class="fas fa-bars"></i></button>
+        </div>
+    </div>
+</header>
+
+<main>
+<section class="hero" id="home">
+    <div class="hero-content">
+        <div class="hero-script">Freshly baked.</div>
+        <h1>PROPERLY <span>GOOD.</span></h1>
+        <p>From our oven to your table, we bring you fresh ingredients, authentic recipes and unforgettable flavours.</p>
+        <div class="hero-actions">
+            <a href="#menu" class="btn btn-gold"><i class="fas fa-utensils"></i> View Menu</a>
+            <a href="#visit" class="btn btn-outline" style="color:#fff;border-color:rgba(255,255,255,.45)"><i class="fas fa-location-dot"></i> Visit Us</a>
+        </div>
+    </div>
+
+    <div class="hero-bar">
+        <div class="hero-feature"><i class="fas fa-bread-slice"></i><div><strong>MADE FRESH</strong><small>Every single day</small></div></div>
+        <div class="hero-feature"><i class="fas fa-seedling"></i><div><strong>QUALITY INGREDIENTS</strong><small>Carefully selected</small></div></div>
+        <div class="hero-feature"><i class="fas fa-hat-chef"></i><div><strong>EXPERTLY CRAFTED</strong><small>With love & passion</small></div></div>
+        <div class="hero-feature"><i class="fas fa-motorcycle"></i><div><strong>FAST DELIVERY</strong><small>At your doorstep</small></div></div>
+    </div>
+</section>
+
+<section class="highlights">
+    <div class="container highlight-grid">
+        <div class="highlight"><i class="fas fa-egg"></i><h3>Breakfast</h3><p>Hearty starts to your day</p></div>
+        <div class="highlight"><i class="fas fa-burger"></i><h3>Burgers & Sandwiches</h3><p>Loaded & satisfying</p></div>
+        <div class="highlight"><i class="fas fa-bread-slice"></i><h3>Fresh Bakes</h3><p>Baked daily with love</p></div>
+        <div class="highlight"><i class="fas fa-mug-saucer"></i><h3>Coffee & Desserts</h3><p>Perfect pairings</p></div>
+    </div>
+</section>
+
+<section class="section story" id="story">
+    <div class="container story-grid">
+        <div class="story-photo">
+            <span class="story-badge">EST. 2015</span>
+            <img src="assets/storefront.jpg" alt="The Bake Factory storefront">
+        </div>
+        <div class="story-copy">
+            <div class="eyebrow">About Us</div>
+            <h2>More Than <span>Just a Bake</span></h2>
+            <p>The Bake Factory brings together freshly baked goodness, hearty breakfasts, comforting café classics, indulgent desserts and carefully crafted coffee in a warm and welcoming space.</p>
+            <p>Located in Gachibowli, Hyderabad, our bakery café is designed to be a cozy place to enjoy good food with friends and family.</p>
+            <a href="#menu" class="btn btn-dark">Explore Our Menu <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="signature">
+    <div class="container">
+        <div class="section-head">
+            <div class="eyebrow">Signature Dishes</div>
+            <h2>What's <span>Calling You?</span></h2>
+            <p>A few favourites to get you started.</p>
+        </div>
+
+        <div class="signature-grid">
+            <article class="food-feature"><img src="assets/english-breakfast.jpg" alt="Full English Breakfast"><div class="food-feature-body"><h3>Full English Breakfast</h3><p>Hearty breakfast with sausages, eggs, toast & more.</p><a class="link" href="#menu">View Menu →</a></div></article>
+            <article class="food-feature"><img src="assets/garlic-bread.jpg" alt="Cheese Garlic Bread"><div class="food-feature-body"><h3>Cheese Garlic Bread</h3><p>Homemade bread, garlic herb butter & melted cheese.</p><a class="link" href="#menu">View Menu →</a></div></article>
+            <article class="food-feature"><img src="assets/chicken-burger.jpg" alt="Pulled Chicken Burger"><div class="food-feature-body"><h3>Pulled Chicken Burger</h3><p>Juicy pulled chicken with cheese & special sauce.</p><a class="link" href="#menu">View Menu →</a></div></article>
+            <article class="food-feature"><img src="assets/farm-pizza.jpg" alt="Farm Fresh Pizza"><div class="food-feature-body"><h3>Farm Fresh Pizza</h3><p>Fresh veggies, mozzarella & homemade sauce.</p><a class="link" href="#menu">View Menu →</a></div></article>
+            <article class="food-feature"><img src="assets/brownie.jpg" alt="Brownie with ice cream"><div class="food-feature-body"><h3>Brownies</h3><p>Rich, fudgy brownies served warm with vanilla ice cream.</p><a class="link" href="#menu">View Menu →</a></div></article>
+            <article class="food-feature"><img src="assets/special-coffee.jpg" alt="Bake Factory Special Coffee"><div class="food-feature-body"><h3>Bake Factory Special Coffee</h3><p>Our signature house blend — strong & smooth.</p><a class="link" href="#menu">View Menu →</a></div></article>
+        </div>
+    </div>
+</section>
+
+<section class="section menu-section" id="menu">
+    <div class="container">
+        <div class="section-head">
+            <div class="eyebrow">Our Menu</div>
+            <h2>Freshly Made, <span>Every Day</span></h2>
+            <p>Browse categories, search dishes and build your order.</p>
+        </div>
+
+        <div class="menu-toolbar">
+            <div class="search">
+                <i class="fas fa-search"></i>
+                <input id="menuSearch" type="search" placeholder="Search pizza, burger, coffee..." aria-label="Search menu">
+            </div>
+            <div class="cart-pill"><i class="fas fa-bag-shopping"></i> Selected <span id="cartCount">0</span></div>
+        </div>
+
+        <div class="tabs-wrap">
+            <div class="menu-tabs" id="menuTabs">
+                <button class="menu-tab active" data-category="all">All</button>
+                <button class="menu-tab" data-category="breakfast">Breakfast</button>
+                <button class="menu-tab" data-category="fries">Fries & Garlic Bread</button>
+                <button class="menu-tab" data-category="salads">Salads</button>
+                <button class="menu-tab" data-category="pizzas">Pizzas</button>
+                <button class="menu-tab" data-category="sandwiches">Sandwiches & Paninis</button>
+                <button class="menu-tab" data-category="burgers">Burgers</button>
+                <button class="menu-tab" data-category="coffee">Coffee</button>
+                <button class="menu-tab" data-category="specials">Specials</button>
+            </div>
+        </div>
+
+        <div class="menu-count" id="menuCount"></div>
+        <div class="menu-grid" id="menuGrid"></div>
+    </div>
+</section>
+
+<section class="section breakfast">
+    <div class="container breakfast-grid">
+        <div class="breakfast-photo"><img src="assets/english-breakfast.jpg" alt="Full English Breakfast"></div>
+        <div class="breakfast-copy">
+            <div class="eyebrow">Breakfast</div>
+            <h2>Start Your Day <span>The Right Way</span></h2>
+            <p>From hearty full breakfasts to light bites, we've got your morning covered.</p>
+            <ul class="list">
+                <li>Full English Breakfast</li>
+                <li>Chicken Sausages, Eggs & Toast</li>
+                <li>Eggs Benedict</li>
+                <li>Spanish Omelette</li>
+                <li>Blueberry Pancakes</li>
+                <li>Breakfast Sandwiches</li>
+            </ul>
+            <a href="#menu" class="btn btn-dark">Explore Breakfast</a>
+        </div>
+    </div>
+</section>
+
+<section class="section coffee">
+    <div class="container coffee-grid">
+        <div class="coffee-photo"><img src="assets/special-coffee.jpg" alt="Signature coffee"></div>
+        <div class="coffee-copy">
+            <div class="eyebrow" style="color:var(--gold)">Coffee & Desserts</div>
+            <h2>Coffee, Cake & <span>Everything Nice</span></h2>
+            <p>Perfect your day with carefully crafted coffee, fresh bakes and indulgent desserts.</p>
+            <div class="coffee-tags">
+                <span>Espresso</span><span>Americano</span><span>Cappuccino</span><span>Vietnamese Coffee</span>
+                <span>Iced Coffee</span><span>Bake Factory Special</span><span>Brownies</span><span>Almond Croissant</span>
+            </div>
+            <a href="#menu" class="btn btn-gold">Explore Coffee Menu</a>
+        </div>
+    </div>
+</section>
+
+<section class="section gallery" id="gallery">
+    <div class="container">
+        <div class="section-head">
+            <div class="eyebrow">Gallery</div>
+            <h2>A Taste of <span>The Bake Factory</span></h2>
+            <p>Good food. Warm spaces. Long conversations.</p>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-item gallery-wide"><img src="assets/farm-pizza.jpg" alt="Farm Fresh Pizza"></div>
+            <div class="gallery-item"><img src="assets/brownie.jpg" alt="Chocolate Brownie"></div>
+            <div class="gallery-item"><img src="assets/special-coffee.jpg" alt="Coffee"></div>
+            <div class="gallery-item gallery-tall"><img src="assets/chicken-burger.jpg" alt="Chicken Burger"></div>
+            <div class="gallery-item"><img src="assets/garlic-bread.jpg" alt="Garlic Bread"></div>
+            <div class="gallery-item"><img src="assets/english-breakfast.jpg" alt="Breakfast"></div>
+        </div>
+    </div>
+</section>
+
+<section class="section reviews" id="reviews">
+    <div class="container">
+        <div class="section-head">
+            <div class="eyebrow">Reviews</div>
+            <h2>Loved By <span>Our Guests</span></h2>
+        </div>
+        <div class="rating"><strong>4.2</strong> <span>★★★★★</span><p>4,065+ Google Reviews</p></div>
+        <div class="review-grid">
+            <article class="review"><div class="stars">★★★★★</div><p>"Good food, great ambience, excellent service. The cheesy burgers and sandwiches are absolutely worth it."</p><small>— Google Review</small></article>
+            <article class="review"><div class="stars">★★★★★</div><p>"The baked goodies and pastries are worth trying. Comfort food at its best. Cozy café atmosphere."</p><small>— Google Review</small></article>
+            <article class="review"><div class="stars">★★★★★</div><p>"One of the best cafes in Gachibowli. The breakfast spread is amazing and the coffee is top-notch."</p><small>— Google Review</small></article>
+        </div>
+    </div>
+</section>
+
+<section class="section visit" id="visit">
+    <div class="container visit-grid">
+        <div class="visit-copy">
+            <div class="eyebrow">Visit Us</div>
+            <h2>The Bake Factory</h2>
+            <div class="contact-line"><i class="fas fa-location-dot"></i><span>Block I, NCB Enclave, Gachibowli,<br>Hyderabad, Telangana 500084</span></div>
+            <div class="contact-line"><i class="fas fa-phone"></i><a href="tel:07893562033">078935 62033</a></div>
+            <div class="hours"><div class="hours-row"><strong>Monday – Sunday</strong><span>10:00 AM – 11:00 PM</span></div></div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap">
+                <a class="btn btn-dark" href="https://maps.app.goo.gl/jjkccsd2Hq2cFWHYA" target="_blank" rel="noopener"><i class="fas fa-map-marked-alt"></i> Get Directions</a>
+                <a class="btn btn-outline" href="tel:07893562033"><i class="fas fa-phone"></i> Call Now</a>
+            </div>
+        </div>
+        <a class="map-card" href="https://maps.app.goo.gl/jjkccsd2Hq2cFWHYA" target="_blank" rel="noopener">
+            <div><i class="fas fa-map-location-dot"></i><h3>Open in Google Maps</h3><p>Block I, NCB Enclave, Gachibowli</p></div>
+        </a>
+    </div>
+</section>
+
+<section class="section reservation" id="reserve">
+    <div class="container">
+        <div class="eyebrow" style="color:var(--gold)">Reserve</div>
+        <h2>Your Table Is Waiting</h2>
+        <p>Breakfast, coffee, comfort food or a long evening — come make yourself at home.</p>
+        <div style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap">
+            <button class="btn btn-gold" id="reserveBtn"><i class="fas fa-calendar-plus"></i> Reserve a Table</button>
+            <a class="btn btn-outline" style="color:#fff;border-color:rgba(255,255,255,.4)" href="tel:07893562033"><i class="fas fa-phone"></i> Call The Bake Factory</a>
+        </div>
+    </div>
+</section>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-cta">
+            <div><h3>READY FOR SOMETHING DELICIOUS?</h3><p>Freshly baked. Properly good.</p></div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap">
+                <a class="btn btn-gold" href="#menu"><i class="fas fa-utensils"></i> View Menu</a>
+                <a class="btn btn-outline" style="color:#fff;border-color:rgba(255,255,255,.35)" href="#visit"><i class="fas fa-location-dot"></i> Visit Us</a>
+            </div>
+        </div>
+
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <strong>THE BAKE FACTORY</strong>
+                <small>EST. 2015</small>
+                <p>Freshly baked. Properly good. A warm bakery café experience in Gachibowli.</p>
+            </div>
+            <div>
+                <h4>QUICK LINKS</h4>
+                <ul class="footer-links">
+                    <li><a href="#home">Home</a></li><li><a href="#menu">Menu</a></li><li><a href="#story">Our Story</a></li>
+                    <li><a href="#gallery">Gallery</a></li><li><a href="#reviews">Reviews</a></li><li><a href="#visit">Visit Us</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>VISIT US</h4>
+                <p>Gachibowli, Hyderabad, Telangana</p>
+                <p style="margin-top:8px"><a href="tel:07893562033">078935 62033</a></p>
+                <p style="margin-top:8px">Mon – Sun: 10:00 AM – 11:00 PM</p>
+            </div>
+            <div>
+                <h4>FOLLOW US</h4>
+                <div class="social-row">
+                    <a class="social" href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a class="social" href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a class="social" href="https://wa.me/9107893562033" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                </div>
+                <p style="font-size:.8rem;color:var(--gold)">@thebakefactory</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <span>© 2026 The Bake Factory. All rights reserved.</span>
+            <span>Privacy Policy · Terms & Conditions</span>
+        </div>
+    </div>
+</footer>
+
+<a class="whatsapp" href="https://wa.me/9107893562033" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+
+<div class="modal" id="modal">
+    <div class="modal-box">
+        <button class="modal-close" id="modalClose" aria-label="Close"><i class="fas fa-xmark"></i></button>
+        <h3 id="modalTitle">Reserve a Table</h3>
+        <p id="modalText">This demo action is ready for the client review. In the production version, this can connect to a real reservation or ordering system.</p>
+        <div class="modal-actions">
+            <a class="btn btn-dark" href="tel:07893562033"><i class="fas fa-phone"></i> Call Now</a>
+            <a class="btn btn-gold" href="https://wa.me/9107893562033" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+        </div>
+    </div>
+</div>
+
+<script>
+const menuData = [
+{ id:1,name:"Full English Breakfast",category:"breakfast",desc:"Chicken sausages, eggs, toast & baked beans",tags:["popular","nonveg"],image:"assets/english-breakfast.jpg"},
+{ id:2,name:"Chicken Sausages, Eggs & Toast",category:"breakfast",desc:"Grilled chicken sausages with eggs & buttered toast",tags:["nonveg"],image:"assets/english-breakfast.jpg"},
+{ id:3,name:"Eggs Benedict",category:"breakfast",desc:"Poached eggs, hollandaise sauce on English muffin",tags:["nonveg"],image:"assets/english-breakfast.jpg"},
+{ id:4,name:"Spanish Omelette",category:"breakfast",desc:"Fluffy omelette with bell peppers, onions & cheese",tags:["veg"],image:"assets/english-breakfast.jpg"},
+{ id:5,name:"Blueberry Pancakes",category:"breakfast",desc:"Fluffy pancakes loaded with blueberries & maple syrup",tags:["veg"],image:"assets/pancakes.jpg"},
+{ id:6,name:"Breakfast Sandwiches",category:"breakfast",desc:"Choice of bacon, sausage or egg on fresh bread",tags:["nonveg"],image:"assets/english-breakfast.jpg"},
+
+{ id:7,name:"Cheese Garlic Bread",category:"fries",desc:"Fresh homemade bread, garlic mayonnaise & cheese",tags:["veg","popular"],image:"assets/garlic-bread.jpg"},
+{ id:8,name:"Jalapeno Garlic Bread",category:"fries",desc:"Garlic bread topped with chipotle sauce, jalapenos & cheese",tags:["veg","spicy"],image:"assets/garlic-bread.jpg"},
+{ id:9,name:"Classic Fries",category:"fries",desc:"Thin cut fries with salt & pepper",tags:["veg"],image:"assets/garlic-bread.jpg"},
+{ id:10,name:"Chilli Fries",category:"fries",desc:"Crispy fries coated with our chilli spice mix",tags:["veg","spicy"],image:"assets/garlic-bread.jpg"},
+{ id:11,name:"Mediterranean Garlic Bread",category:"fries",desc:"Garlic bread with bell peppers, olives & onions",tags:["veg"],image:"assets/garlic-bread.jpg"},
+
+{ id:12,name:"Fresh Fruit Salad",category:"salads",desc:"Pineapple, watermelon, apples, banana with honey-lime dressing",tags:["veg"],image:"assets/salad.jpg"},
+{ id:13,name:"The Greek Salad",category:"salads",desc:"Iceberg lettuce, onions, tomatoes, olives, cucumber & cottage cheese",tags:["veg"],image:"assets/salad.jpg"},
+{ id:14,name:"Tex-Mex Salad",category:"salads",desc:"Crispy nachos, onions, tomatoes, jalapenos, olives, corn & lettuce",tags:["veg","spicy"],image:"assets/salad.jpg"},
+{ id:15,name:"Italian Brunch Salad",category:"salads",desc:"Sauteed mushrooms, onions, tomatoes, peppers, cottage cheese & walnuts",tags:["veg"],image:"assets/salad.jpg"},
+
+{ id:16,name:"Margherita",category:"pizzas",desc:"Tomato sauce, mozzarella & fresh basil",tags:["veg","popular"],image:"assets/farm-pizza.jpg"},
+{ id:17,name:"Garlic Cheese",category:"pizzas",desc:"Homemade garlic aioli, mozzarella cheese & chilli flakes",tags:["veg"],image:"assets/farm-pizza.jpg"},
+{ id:18,name:"Spicy Paneer Tikka",category:"pizzas",desc:"Makhani flavoured paneer, green capsicum, onions, tomatoes, cheese",tags:["veg","spicy"],image:"assets/farm-pizza.jpg"},
+{ id:19,name:"Farm Fresh",category:"pizzas",desc:"Sauteed onion, bell peppers, mushroom, jalapenos, olives, tomato & cheese",tags:["veg"],image:"assets/farm-pizza.jpg"},
+{ id:20,name:"Mushroom Onion",category:"pizzas",desc:"Pan fried onions & mushrooms, with cheese & chilli flakes",tags:["veg"],image:"assets/farm-pizza.jpg"},
+{ id:21,name:"Chicken Lovers",category:"pizzas",desc:"Chicken tikka cubes, chicken sausage, pulled bbq chicken & cheese",tags:["nonveg","popular"],image:"assets/farm-pizza.jpg"},
+{ id:22,name:"Chicken & Cheese",category:"pizzas",desc:"Homemade garlic aioli, chicken, mozzarella cheese",tags:["nonveg"],image:"assets/farm-pizza.jpg"},
+{ id:23,name:"Chicken Pepperoni",category:"pizzas",desc:"Spicy chicken pepperoni slices, chipotle sauce, cheese",tags:["nonveg","spicy"],image:"assets/farm-pizza.jpg"},
+{ id:24,name:"Pork Pepperoni",category:"pizzas",desc:"Pork pepperoni, hot sauce & mozzarella cheese",tags:["nonveg","spicy"],image:"assets/farm-pizza.jpg"},
+{ id:25,name:"BBQ Chicken",category:"pizzas",desc:"BBQ chicken chunks, green peppers, onions & cheese",tags:["nonveg"],image:"assets/farm-pizza.jpg"},
+{ id:26,name:"Pork Lovers",category:"pizzas",desc:"Pork pepperoni, ham, bacon, pork sausages, onions & mushrooms",tags:["nonveg"],image:"assets/farm-pizza.jpg"},
+{ id:27,name:"The Carnivore",category:"pizzas",desc:"Pork sausages, bacon, ham, chicken, mutton, mushrooms, onions & eggs",tags:["nonveg"],image:"assets/farm-pizza.jpg"},
+{ id:28,name:"Bacon & Eggs",category:"pizzas",desc:"Loads of bacon & eggs",tags:["nonveg"],image:"assets/farm-pizza.jpg"},
+{ id:29,name:"BBQ Ribs N Cheese",category:"pizzas",desc:"Tender chunks of bbq ribs with onions & cheese",tags:["nonveg"],image:"assets/farm-pizza.jpg"},
+{ id:30,name:"Spicy Keema & Onions",category:"pizzas",desc:"Hot & spicy mutton keema, onions, boiled eggs & cheese",tags:["nonveg","spicy"],image:"assets/farm-pizza.jpg"},
+
+{ id:31,name:"Spinach Jalapeno Popper Panini",category:"sandwiches",desc:"Sauteed spinach with chopped jalapenos for a tangy kick",tags:["veg","spicy"],image:"assets/chicken-burger.jpg"},
+{ id:32,name:"Tangy Paneer Panini",category:"sandwiches",desc:"Cubed fresh paneer coated in a spiced tomato sauce",tags:["veg"],image:"assets/chicken-burger.jpg"},
+{ id:33,name:"Spinach Creamy Corn Panini",category:"sandwiches",desc:"Spinach & corn sauteed in butter with mustard mayonnaise dressing",tags:["veg"],image:"assets/chicken-burger.jpg"},
+{ id:34,name:"Veg Grilled Sandwich",category:"sandwiches",desc:"Bombay style with cucumber, tomato, onions & cheese with pudina chutney",tags:["veg"],image:"assets/chicken-burger.jpg"},
+{ id:35,name:"Paneer Tikka Sandwich",category:"sandwiches",desc:"Cubed paneer in makhani sauce with capsicum, onions, tomatoes & cheese",tags:["veg"],image:"assets/chicken-burger.jpg"},
+{ id:36,name:"Mushroom Onion Sandwich",category:"sandwiches",desc:"Grilled cheese with butter fried mushrooms & onions",tags:["veg"],image:"assets/chicken-burger.jpg"},
+{ id:37,name:"The Ultimate Grilled Cheese",category:"sandwiches",desc:"Homemade bread, lots of cheese, slathered in butter",tags:["veg","popular"],image:"assets/garlic-bread.jpg"},
+{ id:38,name:"Cheesy Explosion Sandwich",category:"sandwiches",desc:"Grilled cheese topped with more mustard & cheese",tags:["veg"],image:"assets/garlic-bread.jpg"},
+{ id:39,name:"Simply Veg Sandwich",category:"sandwiches",desc:"Fresh homemade brown bread with layers of garden vegetables",tags:["veg"],image:"assets/garlic-bread.jpg"},
+{ id:40,name:"Spicy Paneer Shawarma Roll",category:"sandwiches",desc:"Spicy paneer wrapped in wholesome homemade pita bread",tags:["veg","spicy"],image:"assets/chicken-burger.jpg"},
+{ id:41,name:"Classic Cubano Panini",category:"sandwiches",desc:"Layered with ham, pulled pork & bacon rashers",tags:["nonveg"],image:"assets/chicken-burger.jpg"},
+{ id:42,name:"Flamin Hot Spicy Chicken Panini",category:"sandwiches",desc:"Layers of grilled chicken, bell peppers, onions & hot sauce",tags:["nonveg","spicy"],image:"assets/chicken-burger.jpg"},
+{ id:43,name:"Yo'ol Mamas BBQ Chicken Panini",category:"sandwiches",desc:"Hickory smoked bbq sauce coated chicken with cheese & peppers",tags:["nonveg"],image:"assets/chicken-burger.jpg"},
+{ id:44,name:"Chilli Egg Sandwich",category:"sandwiches",desc:"Yummy eggs with loads of onions & green chillies, on brown bread",tags:["nonveg","spicy"],image:"assets/chicken-burger.jpg"},
+{ id:45,name:"BLT Sandwich",category:"sandwiches",desc:"Pan grilled bacon, fresh juicy tomatoes & crunchy lettuce",tags:["nonveg"],image:"assets/chicken-burger.jpg"},
+{ id:46,name:"Bacon, Chicken, Cheese Sandwich",category:"sandwiches",desc:"Crispy bacon, grilled chicken slices & cheese",tags:["nonveg"],image:"assets/chicken-burger.jpg"},
+{ id:47,name:"Chicken & Cheese Sandwich",category:"sandwiches",desc:"Chopped chicken, hot sauce & cheese",tags:["nonveg"],image:"assets/chicken-burger.jpg"},
+{ id:48,name:"Old Timers Club Sandwich",category:"sandwiches",desc:"Layers of fried egg, chicken, cheese & juicy tomatoes, grilled to perfection",tags:["nonveg","popular"],image:"assets/chicken-burger.jpg"},
+{ id:49,name:"Hot & Spicy Chicken Club",category:"sandwiches",desc:"Layers of hot chicken, egg, cheese & vegetables with hot sauce",tags:["nonveg","spicy"],image:"assets/chicken-burger.jpg"},
+{ id:50,name:"Chicken Shawarma",category:"sandwiches",desc:"Spicy sliced chicken, crunchy vegetables & shawarma sauce in homemade bread",tags:["nonveg","popular"],image:"assets/chicken-burger.jpg"},
+{ id:51,name:"Mutton Shawarma",category:"sandwiches",desc:"Shawarma wrap with pan grilled mutton slice & onions with hot sauce",tags:["nonveg"],image:"assets/chicken-burger.jpg"},
+{ id:52,name:"Pulled Pork Shawarma",category:"sandwiches",desc:"Slow cooked bbq pork with cheese in a fresh made wrap",tags:["nonveg"],image:"assets/chicken-burger.jpg"},
+
+{ id:53,name:"Alu Patty Burger",category:"burgers",desc:"Spiced aloo patty pan grilled",tags:["veg"],image:"assets/chicken-burger.jpg"},
+{ id:54,name:"Dirty Burger with Fried Chicken",category:"burgers",desc:"Chicken patties, jalapenos & loads of mozzarella",tags:["nonveg","spicy","popular"],image:"assets/chicken-burger.jpg"},
+
+{ id:55,name:"Espresso",category:"coffee",desc:"Rich, bold espresso shot",tags:["veg"],image:"assets/special-coffee.jpg"},
+{ id:56,name:"Americano",category:"coffee",desc:"Smooth American-style coffee",tags:["veg"],image:"assets/special-coffee.jpg"},
+{ id:57,name:"Cappuccino",category:"coffee",desc:"Classic cappuccino with creamy foam",tags:["veg"],image:"assets/special-coffee.jpg"},
+{ id:58,name:"Vietnamese",category:"coffee",desc:"Rich Vietnamese-style coffee",tags:["veg"],image:"assets/special-coffee.jpg"},
+{ id:59,name:"Iced Americano",category:"coffee",desc:"Chilled Americano for hot days",tags:["veg"],image:"assets/special-coffee.jpg"},
+{ id:60,name:"Iced Vietnamese",category:"coffee",desc:"Chilled Vietnamese-style coffee",tags:["veg"],image:"assets/special-coffee.jpg"},
+{ id:61,name:"Baba Budan Special",category:"coffee",desc:"Our signature house blend — strong & flavorful",tags:["veg","popular"],image:"assets/special-coffee.jpg"},
+
+{ id:62,name:"Bake Factory Special",category:"specials",desc:"Our all-time favourite house special coffee blend with foamed milk",tags:["veg","popular"],image:"assets/special-coffee.jpg"},
+{ id:63,name:"Mini Meat Platter",category:"specials",desc:"A selection of our finest meats",tags:["nonveg"],image:"assets/chicken-burger.jpg"},
+{ id:64,name:"BBQ Wings",category:"specials",desc:"Juicy chicken wings with BBQ glaze",tags:["nonveg"],image:"assets/chicken-burger.jpg"},
+{ id:65,name:"Hot Chicken Burger with Fries",category:"specials",desc:"Spicy chicken burger served with crispy fries",tags:["nonveg","spicy"],image:"assets/chicken-burger.jpg"},
+{ id:66,name:"Bacon Egg Burger",category:"specials",desc:"Juicy patty with bacon, fried egg & cheese",tags:["nonveg","popular"],image:"assets/chicken-burger.jpg"}
+];
+
+let activeCategory="all";
+let cartCount=0;
+
+const tagLabels={
+    veg:["🌿 Veg","tag-veg"],
+    nonveg:["🍗 Non-Veg","tag-nonveg"],
+    popular:["⭐ Popular","tag-popular"],
+    spicy:["🌶 Spicy","tag-spicy"]
+};
+
+function renderMenu(){
+    const query=document.getElementById("menuSearch").value.trim().toLowerCase();
+    let items=menuData.filter(item=>{
+        const categoryMatch=activeCategory==="all" || item.category===activeCategory;
+        const text=(item.name+" "+item.desc+" "+item.tags.join(" ")).toLowerCase();
+        return categoryMatch && text.includes(query);
+    });
+
+    document.getElementById("menuCount").textContent =
+        `${items.length} ${items.length===1?"item":"items"} found`;
+
+    const grid=document.getElementById("menuGrid");
+
+    if(!items.length){
+        grid.innerHTML=`<div class="no-results"><i class="fas fa-magnifying-glass" style="font-size:2rem;margin-bottom:12px"></i><h3>No dishes found</h3><p>Try another search or category.</p></div>`;
+        return;
+    }
+
+    grid.innerHTML=items.map(item=>{
+        const tags=item.tags.map(tag=>{
+            const data=tagLabels[tag];
+            return data ? `<span class="tag ${data[1]}">${data[0]}</span>` : "";
+        }).join("");
+
+        return `
+        <article class="menu-card">
+            <div class="menu-card-image">
+                <img src="${item.image.startsWith('assets/') ? item.image : 'assets/' + item.image}" alt="${item.name}" loading="lazy">
+            </div>
+            <div class="menu-card-body">
+                <div class="menu-top">
+                    <div>
+                        <div class="menu-number">#${String(item.id).padStart(2,"0")}</div>
+                        <h3>${item.name}</h3>
+                    </div>
+                </div>
+                <p class="menu-desc">${item.desc}</p>
+                <div class="tags">${tags}</div>
+                <div class="menu-bottom">
+                    <span class="menu-price">Menu item</span>
+                    <button class="add-btn" data-id="${item.id}"><i class="fas fa-plus"></i> Add</button>
+                </div>
+            </div>
+        </article>`;
+    }).join("");
+
+    grid.querySelectorAll(".add-btn").forEach(btn=>{
+        btn.addEventListener("click",()=>{
+            cartCount++;
+            document.getElementById("cartCount").textContent=cartCount;
+            const item=menuData.find(x=>x.id===Number(btn.dataset.id));
+            openModal("Added to selection", `${item.name} has been added to your demo order. In the production website, this can connect to a real cart and checkout.`);
+        });
+    });
+}
+
+document.querySelectorAll(".menu-tab").forEach(tab=>{
+    tab.addEventListener("click",()=>{
+        document.querySelectorAll(".menu-tab").forEach(x=>x.classList.remove("active"));
+        tab.classList.add("active");
+        activeCategory=tab.dataset.category;
+        renderMenu();
+    });
+});
+
+document.getElementById("menuSearch").addEventListener("input",renderMenu);
+
+const header=document.getElementById("header");
+window.addEventListener("scroll",()=>{
+    header.classList.toggle("scrolled",window.scrollY>40);
+
+    const sections=[...document.querySelectorAll("main section[id]")];
+    let current="home";
+    sections.forEach(section=>{
+        if(window.scrollY >= section.offsetTop-150) current=section.id;
+    });
+    document.querySelectorAll(".nav a").forEach(link=>{
+        link.classList.toggle("active",link.getAttribute("href")==="#"+current);
+    });
+});
+
+document.getElementById("mobileToggle").addEventListener("click",()=>{
+    document.getElementById("nav").classList.toggle("open");
+});
+
+document.querySelectorAll('.nav a[href^="#"]').forEach(link=>{
+    link.addEventListener("click",()=>document.getElementById("nav").classList.remove("open"));
+});
+
+const modal=document.getElementById("modal");
+function openModal(title,text){
+    document.getElementById("modalTitle").textContent=title;
+    document.getElementById("modalText").textContent=text;
+    modal.classList.add("open");
+}
+function closeModal(){modal.classList.remove("open")}
+document.getElementById("modalClose").addEventListener("click",closeModal);
+modal.addEventListener("click",e=>{if(e.target===modal)closeModal()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal()});
+document.getElementById("reserveBtn").addEventListener("click",()=>{
+    openModal("Reserve a Table","This client demo shows the reservation experience. The production version can connect this button to a real reservation form or booking service.");
+});
+
+renderMenu();
+
+/* ===== PREMIUM DEMO INTERACTIONS ===== */
+(function(){
+    const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const tiltTargets=document.querySelectorAll('.food-feature,.menu-card,.review,.map-card');
+    if(!reduceMotion){
+        tiltTargets.forEach(card=>{
+            card.addEventListener('pointermove',e=>{
+                if(window.innerWidth<900) return;
+                const r=card.getBoundingClientRect();
+                const x=(e.clientX-r.left)/r.width-.5;
+                const y=(e.clientY-r.top)/r.height-.5;
+                card.style.transform=`perspective(900px) rotateX(${(-y*4).toFixed(2)}deg) rotateY(${(x*5).toFixed(2)}deg) translateY(-4px)`;
+            });
+            card.addEventListener('pointerleave',()=>{card.style.transform='';});
+        });
+
+        const hero=document.querySelector('.hero');
+        hero.addEventListener('pointermove',e=>{
+            if(window.innerWidth<900) return;
+            const x=(e.clientX/window.innerWidth-.5);
+            const y=(e.clientY/window.innerHeight-.5);
+            hero.style.setProperty('--mx',`${x*18}px`);
+            hero.style.setProperty('--my',`${y*10}px`);
+        });
+        hero.style.setProperty('--mx','0px');hero.style.setProperty('--my','0px');
+        const style=document.createElement('style');
+        style.textContent='.hero:before{transform:scale(1.04) translate3d(var(--mx),var(--my),0);transition:transform .12s linear}';
+        document.head.appendChild(style);
+    }
+
+    document.querySelectorAll('main section,.footer-cta,.footer-grid').forEach(el=>el.classList.add('reveal'));
+    if(!reduceMotion && 'IntersectionObserver' in window){
+        const io=new IntersectionObserver(entries=>entries.forEach(entry=>{
+            if(entry.isIntersecting){entry.target.classList.add('visible');io.unobserve(entry.target)}
+        }),{threshold:.08});
+        document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+    }else document.querySelectorAll('.reveal').forEach(el=>el.classList.add('visible'));
+})();
+
+</script>
+</body>
+</html>
