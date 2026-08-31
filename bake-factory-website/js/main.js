@@ -32,10 +32,15 @@
   window.addEventListener("resize", () => { if (window.innerWidth > 820) setNav(false); });
 
   // Active page link for all pages.
-  const current = location.pathname.split("/").pop() || "index.html";
+  const getCleanName = p => {
+    const file = (p || "").split("/").pop().split("#")[0];
+    if (!file || file === "index" || file === "index.html") return "index.html";
+    return file.replace(/\.html$/, "") + ".html";
+  };
+  const current = getCleanName(location.pathname);
   $$(".nav a").forEach(a => {
     const href = a.getAttribute("href") || "";
-    const target = href.split("/").pop().split("#")[0] || "index.html";
+    const target = getCleanName(href);
     a.classList.toggle("active", target === current);
   });
 
