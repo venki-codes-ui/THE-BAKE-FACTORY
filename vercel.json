@@ -1,6 +1,9 @@
 {
+  "cleanUrls": true,
   "rewrites": [
     { "source": "/", "destination": "/bake-factory-website/index.html" },
+    { "source": "/index.html", "destination": "/bake-factory-website/index.html" },
+    { "source": "/index", "destination": "/bake-factory-website/index.html" },
     { "source": "/pages/:path*", "destination": "/bake-factory-website/pages/:path*" },
     { "source": "/css/:path*", "destination": "/bake-factory-website/css/:path*" },
     { "source": "/js/:path*", "destination": "/bake-factory-website/js/:path*" },
